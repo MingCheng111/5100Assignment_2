@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Configuration.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Person.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/ui/MainJFrame.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/EncounterHistory.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Doctor.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Community.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/ui/patient/SearchDocJPanel.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Patient.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/DoctorDir.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/ui/doctor/AddDiaJPanel.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/VitalSigns.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/HospitalDir.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Encounter.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/Hospital.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/ui/patient/PatientInfoJPanel.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/PersonDir.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/System.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/ui/sysAdmin/SysAdminJPanel.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/ui/community/ComAdminJPanel.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/PatientDir.java</file>
+            <file>file:/Users/mingcheng/Desktop/5100_Assignment/5100Assignment_2/src/model/City.java</file>
+        </group>
+    </open-files>
+</project-private>
