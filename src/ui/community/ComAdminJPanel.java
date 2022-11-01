@@ -14,6 +14,7 @@ import model.PersonDir;
 import model.VitalSigns;
 import ui.MainJFrame;
 import javax.swing.JOptionPane;
+import model.Hospital;
 /**
  *
  * @author mingcheng
@@ -29,6 +30,8 @@ public class ComAdminJPanel extends javax.swing.JPanel {
         initComponents();
         
         createTable(sys.getPersonDir().getPersontList());
+        createTable12(sys.getHospitalDir().getHospitalList());
+        
     }
     
     
@@ -57,14 +60,29 @@ public class ComAdminJPanel extends javax.swing.JPanel {
      * Creates new form CommunityJPanel
      */
 
-        
-     
-       
-        
-          
-      
+    
 
     }
+ 
+ private void createTable12(ArrayList<Hospital> hospital){
+   
+        
+     
+        DefaultTableModel model = (DefaultTableModel) DisplayHos.getModel();
+        model.setRowCount(0); 
+        
+          
+        
+        
+        for(Hospital hp: hospital){
+                Object [] row = new  Object[1];
+                row [0] = hp;
+           
+
+                 model.addRow(row);
+                 
+        }
+    } 
 // private void createTable(){
 //      
 //      }
@@ -96,8 +114,10 @@ public class ComAdminJPanel extends javax.swing.JPanel {
         btnDelete1 = new javax.swing.JButton();
         btnSearch1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Age1 = new javax.swing.JTable();
+        DisplayHos = new javax.swing.JTable();
         btnAdd1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtHosName1 = new javax.swing.JTextField();
 
         DisplayTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,8 +198,18 @@ public class ComAdminJPanel extends javax.swing.JPanel {
         });
 
         btnEdit1.setText("Edit");
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
 
         btnDelete1.setText("Delete");
+        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete1ActionPerformed(evt);
+            }
+        });
 
         btnSearch1.setText("Search");
         btnSearch1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +218,7 @@ public class ComAdminJPanel extends javax.swing.JPanel {
             }
         });
 
-        Age1.setModel(new javax.swing.table.DefaultTableModel(
+        DisplayHos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -199,9 +229,22 @@ public class ComAdminJPanel extends javax.swing.JPanel {
                 "Hospital Name"
             }
         ));
-        jScrollPane2.setViewportView(Age1);
+        jScrollPane2.setViewportView(DisplayHos);
 
         btnAdd1.setText("Add");
+        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdd1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Name:");
+
+        txtHosName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHosName1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -209,11 +252,6 @@ public class ComAdminJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(btnSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addComponent(btnAdd))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -240,26 +278,37 @@ public class ComAdminJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSearch)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdd)
+                        .addGap(27, 27, 27)
                         .addComponent(btnEdit)
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete)))
                 .addGap(40, 40, 40))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(btnSearch1)
-                .addGap(28, 28, 28)
-                .addComponent(btnAdd1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEdit1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHosName1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdd1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearch1)
+                        .addGap(1, 1, 1)
+                        .addComponent(btnEdit1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete1)
-                .addGap(50, 50, 50))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,28 +334,31 @@ public class ComAdminJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtHosName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSearch)
-                            .addComponent(btnAdd))
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1)
-                        .addGap(48, 48, 48))
+                            .addComponent(btnEdit1)
+                            .addComponent(btnDelete1)
+                            .addComponent(btnAdd1)
+                            .addComponent(btnSearch1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDelete)
-                            .addComponent(btnEdit))
-                        .addGap(67, 67, 67)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch1)
-                    .addComponent(btnAdd1)
-                    .addComponent(btnEdit1)
-                    .addComponent(btnDelete1))
-                .addGap(69, 69, 69))
+                            .addComponent(btnEdit)
+                            .addComponent(btnAdd)
+                            .addComponent(btnSearch))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(118, 118, 118))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -342,6 +394,12 @@ public class ComAdminJPanel extends javax.swing.JPanel {
               
            }
             createTable(people);
+            
+        txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
+        
            
        
                 
@@ -372,6 +430,22 @@ public class ComAdminJPanel extends javax.swing.JPanel {
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
         // TODO add your handling code here:
+         ArrayList<Hospital> hospital = new ArrayList<>();
+         boolean b = false;
+        for(Hospital hp: sys.getHospitalDir().getHospitalList()){
+            if(hp.getName().equals(txtHosName1.getText())){
+                b=true;
+                hospital.add(hp);
+ 
+            }
+          
+        }
+        if(!b){
+                JOptionPane.showMessageDialog(this,"Do not have a match");
+            }
+            
+          createTable12(hospital);  
+        
     }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -391,6 +465,12 @@ public class ComAdminJPanel extends javax.swing.JPanel {
        
        sys.getPersonDir().getPersontList().add(np1);
         createTable(sys.getPersonDir().getPersontList());
+        
+        txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -410,8 +490,13 @@ public class ComAdminJPanel extends javax.swing.JPanel {
          selectedPerson.setHouse(txtAdd.getText());
          
          createTable(sys.getPersonDir().getPersontList());
-         JOptionPane.showMessageDialog(this, "Please select a row to edit");
+         JOptionPane.showMessageDialog(this, "Your Person Info updated");
+         txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
         
+         
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -428,11 +513,73 @@ public class ComAdminJPanel extends javax.swing.JPanel {
         sys.getPersonDir().getPersontList().remove(selectedEmployee);
         createTable(sys.getPersonDir().getPersontList());
         JOptionPane.showMessageDialog(this, "Selected Person Info Deleted.");
+        txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
+        
+        
+        
+        
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void txtHosName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHosName1ActionPerformed
+            // TODO add your handling code here:
+            
+    }//GEN-LAST:event_txtHosName1ActionPerformed
+
+    private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
+        // TODO add your handling code here:
+        Hospital nh = new Hospital();
+        nh.setName(txtHosName1.getText());
+        sys.getHospitalDir().getHospitalList().add(nh);
+        
+        createTable12(sys.getHospitalDir().getHospitalList());
+        
+        
+        txtHosName1.setText("");
+        
+        
+    }//GEN-LAST:event_btnAdd1ActionPerformed
+
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        // TODO add your handling code here:
+         int selectedRowIndex = DisplayHos.getSelectedRow();
+       
+        if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to edit");
+            return;
+        }
+         DefaultTableModel model = (DefaultTableModel)DisplayHos.getModel();
+         Hospital selectedHospital = (Hospital) model.getValueAt(selectedRowIndex,0);
+         
+         selectedHospital.setName(txtHosName1.getText());
+         createTable12(sys.getHospitalDir().getHospitalList());
+         JOptionPane.showMessageDialog(this, "Your Hospital Info updated");
+         txtHosName1.setText("");
+        
+    }//GEN-LAST:event_btnEdit1ActionPerformed
+
+    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = DisplayHos.getSelectedRow();
+       
+        if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel)DisplayHos.getModel();
+         Hospital selectedHospital = (Hospital) model.getValueAt(selectedRowIndex,0);
+         
+         sys.getHospitalDir().getHospitalList().remove(selectedHospital);
+        createTable12(sys.getHospitalDir().getHospitalList());
+        JOptionPane.showMessageDialog(this, "Selected Hospital Info Deleted.");
+        txtHosName1.setText("");
+    }//GEN-LAST:event_btnDelete1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Age1;
+    private javax.swing.JTable DisplayHos;
     private javax.swing.JTable DisplayTable;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAdd1;
@@ -447,11 +594,13 @@ public class ComAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtAdd;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtCom;
+    private javax.swing.JTextField txtHosName1;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

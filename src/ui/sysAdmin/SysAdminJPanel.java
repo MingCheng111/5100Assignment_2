@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.Patient;
 import model.Person;
 import model.PersonDir;
 
@@ -29,6 +31,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         initComponents();
         
         createTable(sys.getPersonDir().getPersontList());
+        createTable1(sys.getDoctorDir().getDoctorList());
         
         
     }
@@ -64,7 +67,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         DisplayTable1 = new javax.swing.JTable();
         txtName1 = new javax.swing.JTextField();
-        txtAge1 = new javax.swing.JTextField();
+        txtHos = new javax.swing.JTextField();
         btnEdit1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -169,16 +172,21 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
         DisplayTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Doctor Name", "Hospital"
+                "", "Doctor Name", "Hospital"
             }
         ));
         jScrollPane2.setViewportView(DisplayTable1);
+        if (DisplayTable1.getColumnModel().getColumnCount() > 0) {
+            DisplayTable1.getColumnModel().getColumn(0).setMinWidth(0);
+            DisplayTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+            DisplayTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         txtName1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,9 +194,9 @@ public class SysAdminJPanel extends javax.swing.JPanel {
             }
         });
 
-        txtAge1.addActionListener(new java.awt.event.ActionListener() {
+        txtHos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAge1ActionPerformed(evt);
+                txtHosActionPerformed(evt);
             }
         });
 
@@ -273,7 +281,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName1)
-                            .addComponent(txtAge1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -321,7 +329,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtAge1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtHos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete1)
@@ -354,6 +362,29 @@ public class SysAdminJPanel extends javax.swing.JPanel {
                  
         }
     }   
+    
+      private void createTable1(ArrayList<Doctor> doctor){
+   
+        
+     
+        DefaultTableModel model = (DefaultTableModel) DisplayTable1.getModel();
+        model.setRowCount(0); 
+        
+          
+        
+        
+        for(Doctor dc: doctor){
+                Object [] row = new  Object[5];
+                row [0] = dc;
+                 row[1] = dc.getName();
+               row [2] = dc.getHospital();
+
+              
+                 model.addRow(row);
+                 
+        }
+    } 
+      
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = DisplayTable.getSelectedRow();
@@ -371,7 +402,11 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         selectedPerson.setHouse(txtAdd.getText());
 
         createTable(sys.getPersonDir().getPersontList());
-        JOptionPane.showMessageDialog(this, "Please select a row to edit");
+        JOptionPane.showMessageDialog(this, "Selected Person Info Updated.");
+        txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
 
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -380,15 +415,19 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = DisplayTable.getSelectedRow();
         if(selectedRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Selected Person Info Deleted.");
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
             return;
         }
         DefaultTableModel model = (DefaultTableModel)DisplayTable.getModel();
-        Person selectedEmployee = (Person) model.getValueAt(selectedRowIndex,0);
+        Person selectedPerson = (Person) model.getValueAt(selectedRowIndex,0);
 
-        sys.getPersonDir().getPersontList().remove(selectedEmployee);
+        sys.getPersonDir().getPersontList().remove(selectedPerson);
         createTable(sys.getPersonDir().getPersontList());
         JOptionPane.showMessageDialog(this, "Selected Person Info Deleted.");
+                txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -422,6 +461,10 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
         }
         createTable(people);
+                txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -451,6 +494,11 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
         sys.getPersonDir().getPersontList().add(np1);
         createTable(sys.getPersonDir().getPersontList());
+        
+        txtName.setText("");
+        txtAge.setText("");
+        txtCom.setText("");
+        txtAdd.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -463,26 +511,87 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = DisplayTable1.getSelectedRow();
+        if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel)DisplayTable1.getModel();
+        Doctor selectedDoctor = (Doctor) model.getValueAt(selectedRowIndex,0);
+
+        sys.getDoctorDir().getDoctorList().remove(selectedDoctor);
+        createTable1(sys.getDoctorDir().getDoctorList());
+        
+        JOptionPane.showMessageDialog(this, "Selected Doctor Info Deleted.");
+
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
         // TODO add your handling code here:
+        
+        ArrayList<Doctor> doctorArr = new ArrayList<>();
+
+        for(Doctor dc:sys.getDoctorDir().getDoctorList()){
+            if(!(txtName1.getText().equals("")||
+                dc.getName().equals(txtName1.getText()))){
+            continue;
+
+        }
+        if(!(txtHos.getText().equals("")||
+            dc.getHospital().equals(txtHos.getText()))){
+        continue;
+
+        }
+        doctorArr.add(dc);
+        }
+        createTable1(doctorArr);
     }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
         // TODO add your handling code here:
+        String name = txtName1.getText();
+        String hospital = txtHos.getText();
+       
+
+        Doctor nd1 = new Doctor();
+
+        nd1.setName(name);
+        nd1.setHospital(hospital);
+    
+
+        sys.getDoctorDir().getDoctorList().add(nd1);
+        createTable1(sys.getDoctorDir().getDoctorList());
+        
+        txtName1.setText("");
+        txtHos.setText("");
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtName1ActionPerformed
 
-    private void txtAge1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAge1ActionPerformed
+    private void txtHosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAge1ActionPerformed
+    }//GEN-LAST:event_txtHosActionPerformed
 
     private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = DisplayTable1.getSelectedRow();
+
+        if(selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to edit");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel)DisplayTable1.getModel();
+        Doctor selectedDoctor = (Doctor) model.getValueAt(selectedRowIndex,0);
+
+        selectedDoctor.setName(txtName1.getText());
+        selectedDoctor.setHospital(txtHos.getText());
+        
+
+        createTable1(sys.getDoctorDir().getDoctorList());
+        JOptionPane.showMessageDialog(this, "Selected Doctor Info Updated.");
     }//GEN-LAST:event_btnEdit1ActionPerformed
 
 
@@ -509,8 +618,8 @@ public class SysAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtAdd;
     private javax.swing.JTextField txtAge;
-    private javax.swing.JTextField txtAge1;
     private javax.swing.JTextField txtCom;
+    private javax.swing.JTextField txtHos;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtName1;
     // End of variables declaration//GEN-END:variables
